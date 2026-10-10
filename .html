@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyUp | Aprende y avanza</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f6fc;
+            color: #183153;
+        }
+
+        header {
+            background: #1769ff;
+            color: white;
+            padding: 22px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+        }
+
+        header p {
+            margin-top: 8px;
+        }
+
+        nav {
+            background: white;
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        nav a {
+            color: #1769ff;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 25px auto;
+            padding: 0 18px;
+        }
+
+        .bienvenida {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 22px;
+        }
+
+        .bienvenida h2 {
+            margin-bottom: 10px;
+        }
+
+        .contenedor {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(220px, 1fr)
+            );
+            gap: 18px;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 3px 12px #0000000d;
+        }
+
+        .tarjeta h3 {
+            color: #1769ff;
+            margin-bottom: 12px;
+        }
+
+        button {
+            background: #1769ff;
+            color: white;
+            border: none;
+            padding: 11px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        button:hover {
+            background: #0c4dcc;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 11px;
+            margin-top: 10px;
+            border: 1px solid #ccd5e0;
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .nota {
+            background: #f2f6fc;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            overflow-wrap: anywhere;
+        }
+
+        .amarillo {
+            border-left: 5px solid #ffc928;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>📚 StudyUp</h1>
+        <p>Aprende, guarda y avanza.</p>
+    </header>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#notas">Mis notas</a>
+        <a href="#quiz">Cuestionario</a>
+    </nav>
+
+    <main>
+        <section id="inicio" class="bienvenida">
+            <h2>¡Bienvenido a StudyUp!</h2>
+            <p>
+                Tu espacio para organizar tus estudios,
+                guardar apuntes y practicar lo aprendido.
+            </p>
+        </section>
+
+        <section id="cursos">
+            <h2>📘 Mis cursos</h2>
+
+            <div class="contenedor" style="margin-top: 16px;">
+                <article class="tarjeta">
+                    <h3>Matemática</h3>
+                    <p>Practica operaciones y resuelve problemas.</p>
+                </article>
+
+                <article class="tarjeta">
+                    <h3>Comunicación</h3>
+                    <p>Organiza lecturas, textos y resúmenes.</p>
+                </article>
+
+                <article class="tarjeta">
+                    <h3>Ciencia y Tecnología</h3>
+                    <p>Guarda tus investigaciones y experimentos.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="notas" style="margin-top: 30px;">
+            <h2>📝 Mis notas</h2>
+
+            <div class="tarjeta" style="margin-top: 16px;">
+                <form id="formularioNotas">
+                    <label for="curso">Selecciona un curso:</label>
+
+                    <select id="curso" required>
+                        <option value="">Elige un curso</option>
+                        <option>Matemática</option>
+                        <option>Comunicación</option>
+                        <option>Ciencia y Tecnología</option>
+                        <option>Historia</option>
+                        <option>Otro</option>
+                    </select>
+
+                    <label for="titulo">Título de tu nota:</label>
+                    <input
+                        id="titulo"
+                        type="text"
+                        placeholder="Ej. La célula"
+                        required
+                    >
+
+                    <label for="contenido">Contenido:</label>
+                    <textarea
+                        id="contenido"
+                        placeholder="Escribe aquí tus apuntes..."
+                        required
+                    ></textarea>
+
+                    <button type="submit">Guardar nota</button>
+                </form>
+
+                <div id="listaNotas" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section id="quiz" style="margin-top: 30px;">
+            <h2>🧠 Cuestionario rápido</h2>
+
+            <div class="tarjeta" style="margin-top: 16px;">
+                <p><strong>
+                    ¿Qué etiqueta HTML contiene el contenido
+                    principal de una página?
+                </strong></p>
+
+                <button type="button" data-respuesta="incorrecta">
+                    &lt;footer&gt;
+                </button>
+
+                <button type="button" data-respuesta="correcta">
+                    &lt;main&gt;
+                </button>
+
+                <button type="button" data-respuesta="incorrecta">
+                    &lt;head&gt;
+                </button>
+
+                <p id="resultadoQuiz" style="margin-top: 14px;" aria-live="polite"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>StudyUp © 2026 | Aprende, guarda y avanza.</p>
+    </footer>
+
+    <script>
+        const formulario = document.getElementById("formularioNotas");
+        const listaNotas = document.getElementById("listaNotas");
+
+        let notas = [];
+
+        try {
+            notas = JSON.parse(
+                localStorage.getItem("studyup_notas") || "[]"
+            );
+
+            if (!Array.isArray(notas)) {
+                notas = [];
+            }
+        } catch (error) {
+            notas = [];
+        }
+
+        function mostrarNotas() {
+            listaNotas.replaceChildren();
+
+            if (notas.length === 0) {
+                const mensaje = document.createElement("p");
+                mensaje.textContent = "Todavía no tienes notas guardadas.";
+                mensaje.style.marginTop = "15px";
+                listaNotas.appendChild(mensaje);
+                return;
+            }
+
+            notas.forEach(function(nota, indice) {
+                const tarjeta = document.createElement("article");
+                tarjeta.className = "nota amarillo";
+
+                const titulo = document.createElement("h3");
+                titulo.textContent = nota.titulo;
+
+                const curso = document.createElement("p");
+                curso.textContent = "Curso: " + nota.curso;
+
+                const contenido = document.createElement("p");
+                contenido.textContent = nota.contenido;
+                contenido.style.whiteSpace = "pre-wrap";
+                contenido.style.marginTop = "8px";
+
+                const boton = document.createElement("button");
+                boton.type = "button";
+                boton.textContent = "Eliminar nota";
+
+                boton.addEventListener("click", function() {
+                    notas.splice(indice, 1);
+                    guardarNotas();
+                    mostrarNotas();
+                });
+
+                tarjeta.append(titulo, curso, contenido, boton);
+                listaNotas.appendChild(tarjeta);
+            });
+        }
+
+        function guardarNotas() {
+            try {
+                localStorage.setItem(
+                    "studyup_notas",
+                    JSON.stringify(notas)
+                );
+            } catch (error) {
+                alert("No se pudo guardar. Revisa el espacio disponible.");
+            }
+        }
+
+        formulario.addEventListener("submit", function(evento) {
+            evento.preventDefault();
+
+            const curso = document.getElementById("curso").value;
+            const titulo = document.getElementById("titulo").value.trim();
+            const contenido = document.getElementById("contenido").value.trim();
+
+            if (!curso || !titulo || !contenido) {
+                alert("Completa todos los campos.");
+                return;
+            }
+
+            notas.push({
+                curso: curso,
+                titulo: titulo,
+                contenido: contenido
+            });
+
+            guardarNotas();
+            mostrarNotas();
+            formulario.reset();
+
+            alert("¡Nota guardada!");
+        });
+
+        document.querySelectorAll("[data-respuesta]").forEach(function(boton) {
+            boton.addEventListener("click", function() {
+                const resultado = document.getElementById("resultadoQuiz");
+
+                if (boton.dataset.respuesta === "correcta") {
+                    resultado.textContent = "¡Correcto! 🎉";
+                } else {
+                    resultado.textContent = "Inténtalo otra vez. 💪";
+                }
+            });
+        });
+
+        mostrarNotas();
+    </script>
+
+</body>
+</html>
